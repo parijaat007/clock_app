@@ -72,7 +72,7 @@ class ClockPainter extends CustomPainter {
       ..color = Colors.orange[300]
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 5;
+      ..strokeWidth = 2;
       
     var dashBrush = Paint()
       ..color = Color(0xFFEAECFF)
@@ -101,6 +101,12 @@ class ClockPainter extends CustomPainter {
         80 * sin((curr.minute * 6 + curr.second * 0.1) * pi / 180);
     canvas.drawLine(center, Offset(minHandX, minHandY), minHandBrush);
     
+    var secHandX = centerX +
+        80 * cos((curr.second * 6 + curr.millisecond * 0.006) * pi / 180);
+    var secHandY = centerX +
+        80 * sin((curr.second * 6 + curr.millisecond * 0.006) * pi / 180);
+    canvas.drawLine(center, Offset(secHandX, secHandY), secHandBrush);
+
     canvas.drawCircle(center, 10, centerFillBrush);
 
     var outerCircleRadius = radius - 30;
@@ -110,17 +116,17 @@ class ClockPainter extends CustomPainter {
     
     for (double i = 0; i < 360; i += 30) {
       var x1 = centerX + outerCircleRadius * cos(i * pi / 180);
-      var y1 = centerX + outerCircleRadius * sin(i * pi / 180);
+      var y1 = centerY + outerCircleRadius * sin(i * pi / 180);
       var x2 = centerX + innerCircleRadius * cos(i * pi / 180);
-      var y2 = centerX + innerCircleRadius * sin(i * pi / 180);
+      var y2 = centerY + innerCircleRadius * sin(i * pi / 180);
       canvas.drawLine(Offset(x1, y1), Offset(x2, y2), dashBrush);
     }
 
     for (double i = 0; i < 360; i += 6) {
       var x3 = centerX + outerCircleRadiusMinor * cos(i * pi / 180);
-      var y3 = centerX + outerCircleRadiusMinor * sin(i * pi / 180);
+      var y3 = centerY + outerCircleRadiusMinor * sin(i * pi / 180);
       var x4 = centerX + innerCircleRadiusMinor * cos(i * pi / 180);
-      var y4 = centerX + innerCircleRadiusMinor * sin(i * pi / 180);
+      var y4 = centerY + innerCircleRadiusMinor * sin(i * pi / 180);
       canvas.drawLine(Offset(x3, y3), Offset(x4, y4), dashBrushMinor);
     }
   }
