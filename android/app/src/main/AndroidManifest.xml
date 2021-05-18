@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.clock_app">
+    package="com.parijaat.clock_app">
    <application
-        android:label="clock_app"
+        android:label="Beautiful clock"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
